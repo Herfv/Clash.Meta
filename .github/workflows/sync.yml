@@ -1,0 +1,31 @@
+name: Sync Fork
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '46 23 * * *'
+
+jobs:
+  sync:
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: tgymnich/fork-sync@v1.2.1
+        with:
+          github_token: ${{ secrets.QASCWE_TOKEN }}
+          owner: MetaCubeX
+          base: Alpha
+          head: Alpha
+
+  sync2:
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: tgymnich/fork-sync@v1.2.1
+        with:
+          github_token: ${{ secrets.QASCWE_TOKEN }}
+          owner: MetaCubeX
+          base: Meta
+          head: Meta
