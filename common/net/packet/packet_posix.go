@@ -3,7 +3,6 @@
 package packet
 
 import (
-	"io"
 	"net"
 	"strconv"
 	"syscall"
@@ -48,9 +47,10 @@ func (c *enhanceUDPConn) WaitReadFrom() (data []byte, put func(), addr net.Addr,
 				addr = &net.UDPAddr{IP: ip[:], Port: from.Port, Zone: strconv.FormatInt(int64(from.ZoneId), 10)}
 			}
 		}
-		if readN == 0 {
-			readErr = io.EOF
-		}
+		// udp should not convert readN == 0 to io.EOF
+		//if readN == 0 {
+		//	readErr = io.EOF
+		//}
 		return true
 	})
 	if err != nil {

@@ -54,6 +54,9 @@ func handleUDPToLocal(packet C.UDPPacket, pc N.EnhancePacketConn, key string, oA
 			}
 		}
 
+		if len(data) <= 0 {
+			continue
+		}
 		_, err = packet.WriteBack(data, fromUDPAddr)
 		put()
 		if err != nil {
